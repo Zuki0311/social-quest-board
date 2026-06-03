@@ -893,6 +893,64 @@ STEAM教育への関心は高まっていますが、教材費が高く、経済
     updatedAt: "2026-06-02",
   },
   {
+    id: "q-comm-4",
+    title: "施工管理リスキリングアカデミー運営",
+    description: "不足する施工管理人材を異業種から育成するリスキリングアカデミーを運営し、建設業界の人材課題を解決する",
+    detail: `## 背景
+建設業界では2024年問題（時間外労働規制）により施工管理人材の不足が深刻化。一方、異業種には「手に職をつけたい」「社会に残る仕事がしたい」という志を持つ人材が多数います。
+
+## やること
+- 異業種人材向けの施工管理リスキリングカリキュラム設計・運営
+- 建設会社・ゼネコンとの受入先マッチング
+- 受講生のキャリア支援（資格取得サポート・現場OJT設計）
+- アカデミー受講生の公募・選考プロセス構築
+- 卒業生コミュニティの形成と継続的なフォローアップ
+
+## 目指す姿
+「建設業は未経験だから無理」という壁を壊し、志のある人なら誰でも街づくりに参加できる世界を作る。
+3年で500名の施工管理技士を異業種から輩出する。`,
+    size: "large",
+    status: "open",
+    category: "community",
+    companyId: "machi-lab",
+    rewards: ["教育事業の立上げ経験", "建設業界のネットワーク", "人材育成のノウハウ", "国家資格取得支援"],
+    skills: ["教育カリキュラム設計", "プロジェクトマネジメント", "採用・人材開発", "建設業界知識"],
+    participants: 8,
+    comments: 12,
+    createdAt: "2026-06-01",
+    updatedAt: "2026-06-03",
+  },
+  {
+    id: "q-comm-5",
+    title: "施工管理リスキリングアカデミー受講生公募",
+    description: "異業種から施工管理のプロを目指す受講生を全国から募集。未経験OK、6ヶ月で現場デビューを目指す",
+    detail: `## こんな人を求めています
+- 「街をつくる仕事」に興味がある異業種の方（営業、IT、飲食、製造など経歴不問）
+- 手に職をつけたい、社会に形が残る仕事がしたい方
+- 建設・施工管理は未経験だけどチャレンジしたい方
+
+## プログラム内容
+- 6ヶ月の集中プログラム（座学3ヶ月＋現場OJT3ヶ月）
+- 2級施工管理技士の資格取得サポート
+- 現役施工管理のメンターがマンツーマンで伴走
+- 修了後の就職先マッチング（提携ゼネコン・建設会社20社以上）
+
+## 待遇
+- 受講料無料（提携企業が負担）
+- OJT期間中は日当支給
+- 修了後の就職率95%以上（過去実績）`,
+    size: "medium",
+    status: "open",
+    category: "community",
+    companyId: "machi-lab",
+    rewards: ["施工管理技士資格", "建設現場の実務経験", "就職先マッチング", "同期の仲間ネットワーク"],
+    skills: ["やる気と体力", "コミュニケーション力", "基本的なPC操作"],
+    participants: 23,
+    comments: 31,
+    createdAt: "2026-05-20",
+    updatedAt: "2026-06-03",
+  },
+  {
     id: "q-jp-1",
     title: "和食文化の海外発信プラットフォーム",
     description: "和食の歴史・技法・食材を多言語で発信するWebプラットフォームを構築し、世界にファンを作る",
@@ -1529,13 +1587,13 @@ export const socialThemes: SocialTheme[] = [
       },
     ],
     engagements: [
-      { type: "fulltime", questIds: ["q-comm-1"] },
-      { type: "contract", questIds: ["q-comm-3"] },
-      { type: "project", questIds: ["q-comm-1", "q-comm-2", "q-comm-3"] },
-      { type: "intern", questIds: ["q-comm-1"] },
-      { type: "oneday", questIds: ["q-comm-2"] },
+      { type: "fulltime", questIds: ["q-comm-1", "q-comm-4"] },
+      { type: "contract", questIds: ["q-comm-3", "q-comm-4"] },
+      { type: "project", questIds: ["q-comm-1", "q-comm-2", "q-comm-3", "q-comm-4"] },
+      { type: "intern", questIds: ["q-comm-1", "q-comm-5"] },
+      { type: "oneday", questIds: ["q-comm-2", "q-comm-5"] },
     ],
-    questIds: ["q-comm-1", "q-comm-2", "q-comm-3"],
+    questIds: ["q-comm-1", "q-comm-2", "q-comm-3", "q-comm-4", "q-comm-5"],
   },
   {
     id: "japan",
