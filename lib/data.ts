@@ -1091,10 +1091,569 @@ export const comments: Comment[] = [
   },
 ];
 
+export type EngagementType = "fulltime" | "contract" | "intern" | "probono" | "project" | "oneday";
+
+export interface Story {
+  id: string;
+  companyId: string;
+  title: string;
+  summary: string;
+  personName: string;
+  personRole: string;
+  personAvatar: string;
+  quote: string;
+  tags: string[];
+}
+
+export interface SocialTheme {
+  id: string;
+  label: string;
+  subtitle: string;
+  color: string;
+  description: string;
+  whyItMatters: string;
+  stats: { label: string; value: string }[];
+  stories: Story[];
+  engagements: { type: EngagementType; questIds: string[] }[];
+  questIds: string[];
+}
+
+export const engagementLabels: Record<EngagementType, { label: string; icon: string; description: string }> = {
+  fulltime: { label: "正社員", icon: "🏢", description: "志を本業にする" },
+  contract: { label: "業務委託", icon: "💼", description: "スキルで貢献する" },
+  intern: { label: "インターン", icon: "🎓", description: "学びながら関わる" },
+  probono: { label: "プロボノ", icon: "🤲", description: "専門性を無償で活かす" },
+  project: { label: "プロジェクト参加", icon: "🚀", description: "期間限定で挑戦する" },
+  oneday: { label: "1Day体験", icon: "👀", description: "まずは見てみる" },
+};
+
+export const socialThemes: SocialTheme[] = [
+  {
+    id: "nature",
+    label: "自然との共生",
+    subtitle: "循環型社会の創造",
+    color: "#4A9E5C",
+    description: "気候変動、生物多様性の喪失、資源の枯渇。地球環境の課題は待ったなしです。テクノロジーとビジネスの力で、自然と人間が共存する循環型社会を作る。それが「自然との共生」のテーマです。",
+    whyItMatters: "日本の製造業におけるCO2排出量の約6割は中小企業が占めています。しかし、可視化・削減のためのリソースが圧倒的に不足。技術を持つ人と、現場を知る人が繋がることで、初めて本当の変化が生まれます。",
+    stats: [
+      { label: "参加企業", value: "12社" },
+      { label: "CO2削減目標", value: "年間1,200t" },
+      { label: "参加者", value: "47人" },
+    ],
+    stories: [
+      {
+        id: "s-nature-1",
+        companyId: "greentech-jp",
+        title: "町工場のおっちゃんがデータサイエンティストになった日",
+        summary: "「うちみたいな小さい工場には関係ない」と思っていた金属加工の鈴木さん。CO2可視化ダッシュボード導入をきっかけに、自らデータを読み解き、エネルギーコストを23%削減した。",
+        personName: "鈴木 健一",
+        personRole: "金属加工業 工場長",
+        personAvatar: "🏭",
+        quote: "数字が見えたら、現場の人間は勝手に工夫し始めるんだよ。CO2とかよくわからんかったけど、電気代が下がるなら最高じゃないか。",
+        tags: ["製造業", "データ可視化", "中小企業"],
+      },
+      {
+        id: "s-nature-2",
+        companyId: "greentech-jp",
+        title: "エンジニアが脱炭素の最前線に立つということ",
+        summary: "大手SIerを辞めてグリーンテックに入社した田中さん。「技術で社会を変えたい」という漠然とした想いが、製造現場と向き合う中で具体的な使命に変わった。",
+        personName: "田中 悠太",
+        personRole: "グリーンテック・ジャパン エンジニア",
+        personAvatar: "👨‍💻",
+        quote: "コードを書く先に、煙突から出る煙が減る。こんなにフィードバックがダイレクトな仕事は初めてだった。",
+        tags: ["エンジニア", "転職", "インパクト"],
+      },
+    ],
+    engagements: [
+      { type: "fulltime", questIds: ["quest-001"] },
+      { type: "contract", questIds: ["quest-004"] },
+      { type: "project", questIds: ["quest-008", "q-nature-4"] },
+      { type: "intern", questIds: ["quest-001"] },
+      { type: "oneday", questIds: ["quest-008"] },
+    ],
+    questIds: ["quest-001", "quest-004", "quest-008", "q-nature-4"],
+  },
+  {
+    id: "life",
+    label: "人生に寄り添い",
+    subtitle: "「生きる」に貢献",
+    color: "#E0736E",
+    description: "介護、医療、メンタルヘルス。人の「生きる」を支える領域は、最も人手が足りず、最もやりがいのある分野です。テクノロジーの力で、支える人も支えられる人も笑顔になれる仕組みを作る。",
+    whyItMatters: "2025年には介護人材が約32万人不足すると言われています。現場は疲弊し、離職率は高い。でも「辞めたくない」という声も多い。課題は「仕事そのもの」ではなく「仕事の仕組み」にあります。",
+    stats: [
+      { label: "参加企業", value: "8社" },
+      { label: "インタビュー収集数", value: "67/100人" },
+      { label: "参加者", value: "21人" },
+    ],
+    stories: [
+      {
+        id: "s-life-1",
+        companyId: "komorebi-care",
+        title: "介護の現場から聞こえてきた、予想外の『声』",
+        summary: "100人インタビュープロジェクトで見えてきたのは、「給料が安い」ではなく「自分の工夫が認められない」という声。ヘルパーたちの本当の課題は、想像とは違うところにあった。",
+        personName: "佐々木 美咲",
+        personRole: "UXリサーチャー（プロボノ参加）",
+        personAvatar: "🎨",
+        quote: "リサーチャーとして参加したはずが、介護の奥深さに完全にハマりました。今は本業の傍ら、毎週インタビューを続けています。",
+        tags: ["介護", "UXリサーチ", "プロボノ"],
+      },
+    ],
+    engagements: [
+      { type: "fulltime", questIds: ["quest-007"] },
+      { type: "probono", questIds: ["quest-003"] },
+      { type: "project", questIds: ["q-life-3"] },
+      { type: "intern", questIds: ["quest-007"] },
+      { type: "oneday", questIds: ["quest-003"] },
+    ],
+    questIds: ["quest-003", "quest-007", "q-life-3"],
+  },
+  {
+    id: "culture",
+    label: "文化をつくる",
+    subtitle: "伝える",
+    color: "#8B7355",
+    description: "伝統工芸、祭り、芸術。日本の文化は、担い手の高齢化と後継者不足で静かに消えつつあります。デジタル技術で記録し、新しい届け方で価値を繋ぐ。文化の未来は、テクノロジーと感性の掛け合わせの中にあります。",
+    whyItMatters: "経済産業省の調査では、伝統工芸品の生産額はピーク時の1/5以下に。職人の平均年齢は65歳を超え、70%の工房が後継者不在。「残す」だけでなく「活かす」アプローチが求められています。",
+    stats: [
+      { label: "アーカイブ済み工芸", value: "23件" },
+      { label: "連携職人数", value: "80名" },
+      { label: "参加者", value: "9人" },
+    ],
+    stories: [
+      {
+        id: "s-culture-1",
+        companyId: "heritage-bridge",
+        title: "3Dスキャンが、72歳の職人の手を未来に残した",
+        summary: "京都の漆職人・中村さんの技法を3Dスキャンで記録。指の動き、力の入れ方、道具の角度。デジタルが捉えたのは、言葉では伝えられない「身体知」だった。",
+        personName: "中村 清",
+        personRole: "漆芸職人・人間国宝候補",
+        personAvatar: "🎨",
+        quote: "若い子が機械を持ってきて、わしの手をぐるぐる撮るんや。不思議やったけど、弟子にも伝えきれなかったことが形になった。",
+        tags: ["伝統工芸", "3Dスキャン", "技術伝承"],
+      },
+    ],
+    engagements: [
+      { type: "fulltime", questIds: ["q-culture-1"] },
+      { type: "contract", questIds: ["q-culture-2"] },
+      { type: "project", questIds: ["q-culture-1", "q-culture-2"] },
+      { type: "oneday", questIds: ["q-culture-2"] },
+    ],
+    questIds: ["q-culture-1", "q-culture-2"],
+  },
+  {
+    id: "work",
+    label: "はたらくことを",
+    subtitle: "もっと豊かに",
+    color: "#3D3D3D",
+    description: "障がい者雇用、就労支援、多様な働き方。「はたらく」は人間の尊厳に関わる問題です。誰もが自分の『得意』を活かせる労働市場を作る。それは福祉ではなく、社会全体の生産性向上でもあります。",
+    whyItMatters: "法定雇用率の引き上げにより企業の障がい者雇用ニーズは急増していますが、「何をしてもらえばいいかわからない」企業が7割。マッチングの仕組みと成功事例の共有が鍵です。",
+    stats: [
+      { label: "就労支援実績", value: "年間200名" },
+      { label: "連携企業", value: "150社" },
+      { label: "参加者", value: "22人" },
+    ],
+    stories: [
+      {
+        id: "s-work-1",
+        companyId: "tsunagu-works",
+        title: "「できない」を「できる」に変えた、業務切り出しの魔法",
+        summary: "「障がい者に任せる仕事がない」と言っていた製造業の人事担当者。ツナグワークスのコンサルを受けて業務を分解したら、20以上の「実は人手が足りなかった」タスクが見つかった。",
+        personName: "山田 真理子",
+        personRole: "ツナグワークス コンサルタント",
+        personAvatar: "🤝",
+        quote: "障がい者雇用は福祉じゃない。人材戦略です。その視点を持てた瞬間に、企業の姿勢がガラッと変わる。",
+        tags: ["障がい者雇用", "業務設計", "D&I"],
+      },
+    ],
+    engagements: [
+      { type: "fulltime", questIds: ["quest-005", "quest-009"] },
+      { type: "contract", questIds: ["quest-005"] },
+      { type: "probono", questIds: ["quest-009"] },
+      { type: "project", questIds: ["q-work-3"] },
+      { type: "intern", questIds: ["quest-009"] },
+    ],
+    questIds: ["quest-005", "quest-009", "q-work-3"],
+  },
+  {
+    id: "challenge",
+    label: "人の挑戦",
+    subtitle: "自己実現を応援",
+    color: "#D4729A",
+    description: "起業、新規事業、キャリアチェンジ。挑戦する人を孤独にしない。メンタリング、コミュニティ、実践の場を通じて、「やりたい」を「やっている」に変える伴走を。",
+    whyItMatters: "社会起業家の3年生存率は約40%。失敗の最大原因は資金でもアイデアでもなく「孤立」。経験者のメンタリングがあるだけで生存率は2倍になるという調査結果があります。",
+    stats: [
+      { label: "メンター登録数", value: "38名" },
+      { label: "支援した起業家", value: "120名" },
+      { label: "参加者", value: "16人" },
+    ],
+    stories: [
+      {
+        id: "s-challenge-1",
+        companyId: "machi-lab",
+        title: "高校生が地域の課題をビジネスに変えた夏",
+        summary: "ソーシャルビジネスコンテストに参加した高校2年の木村さん。地元の空き家問題を題材にしたプランが優秀賞を受賞。現在は実際にNPOを設立準備中。",
+        personName: "木村 凛",
+        personRole: "高校2年生・NPO設立準備中",
+        personAvatar: "🌟",
+        quote: "大人たちが『それ、いいじゃん』って本気で言ってくれたのが嬉しかった。自分のアイデアが誰かの役に立つかもって、初めて思えた。",
+        tags: ["高校生", "起業", "地域課題"],
+      },
+    ],
+    engagements: [
+      { type: "probono", questIds: ["q-challenge-1"] },
+      { type: "project", questIds: ["q-challenge-2"] },
+      { type: "intern", questIds: ["q-challenge-2"] },
+      { type: "oneday", questIds: ["q-challenge-2"] },
+    ],
+    questIds: ["q-challenge-1", "q-challenge-2"],
+  },
+  {
+    id: "technology",
+    label: "技術の明日を拓き",
+    subtitle: "常識を変える",
+    color: "#6B8CC7",
+    description: "AI、IoT、ドローン、ブロックチェーン。先端技術は、社会課題のある「現場」に届いて初めて価値になります。研究室から飛び出して、本当に困っている人のためにコードを書く。",
+    whyItMatters: "日本のAI導入率は大企業で約30%、中小企業では5%未満。技術そのものは揃っているのに、現場とのブリッジが圧倒的に足りていません。",
+    stats: [
+      { label: "技術プロジェクト", value: "15件" },
+      { label: "連携大学", value: "8校" },
+      { label: "参加者", value: "17人" },
+    ],
+    stories: [
+      {
+        id: "s-tech-1",
+        companyId: "mirai-tech",
+        title: "農家のおばあちゃんがIoTセンサーの虜になった理由",
+        summary: "「機械はよくわからん」と言っていた農家の田中さん。土壌センサーを設置してスマホに通知が来る仕組みを導入したら、毎朝データをチェックするのが日課に。収穫量は15%向上。",
+        personName: "田中 ハナ",
+        personRole: "農家・72歳",
+        personAvatar: "👩‍🌾",
+        quote: "スマホが『水あげて〜』って教えてくれるの。孫に教えてもらったんだけど、もう手放せないわ。",
+        tags: ["農業IoT", "シニア", "スマート農業"],
+      },
+    ],
+    engagements: [
+      { type: "fulltime", questIds: ["q-tech-1"] },
+      { type: "contract", questIds: ["q-tech-1", "q-tech-3"] },
+      { type: "project", questIds: ["q-tech-2", "q-tech-3"] },
+      { type: "intern", questIds: ["q-tech-2"] },
+      { type: "oneday", questIds: ["q-tech-2"] },
+    ],
+    questIds: ["q-tech-1", "q-tech-2", "q-tech-3"],
+  },
+  {
+    id: "lifestyle",
+    label: "暮らしに",
+    subtitle: "新しい感性や楽しさを",
+    color: "#7AB648",
+    description: "サステナブルファッション、地域の図書館、コミュニティスペース。日常の暮らしの中に、新しい選択肢と豊かさの定義を提案する。大きなイノベーションではなく、小さな「いいね」の積み重ね。",
+    whyItMatters: "ファッション業界は世界第2位の環境汚染産業。でも消費者の85%が「サステナブルな選択をしたい」と回答。暮らしの中の小さな選択が、大きな変化を生み出します。",
+    stats: [
+      { label: "連携ブランド", value: "15社" },
+      { label: "コミュニティスペース", value: "8箇所" },
+      { label: "参加者", value: "8人" },
+    ],
+    stories: [
+      {
+        id: "s-lifestyle-1",
+        companyId: "earth-kitchen",
+        title: "捨てられるはずだった服が、新しい素材に生まれ変わる",
+        summary: "廃棄衣料のリサイクル研究に参加した大学院生の吉田さん。化学の知識を活かして開発した新素材が、アパレルブランド3社に採用された。",
+        personName: "吉田 彩",
+        personRole: "大学院生・素材研究者",
+        personAvatar: "🧪",
+        quote: "自分の研究が実際にプロダクトになるなんて思わなかった。基礎研究と社会実装の間に、こういう場があるのは本当にありがたい。",
+        tags: ["サステナブル", "素材研究", "産学連携"],
+      },
+    ],
+    engagements: [
+      { type: "project", questIds: ["q-life-s1"] },
+      { type: "probono", questIds: ["q-life-s2"] },
+      { type: "oneday", questIds: ["q-life-s2"] },
+    ],
+    questIds: ["q-life-s1", "q-life-s2"],
+  },
+  {
+    id: "infrastructure",
+    label: "インフラ・社会基盤を",
+    subtitle: "進化させる",
+    color: "#8B8B6B",
+    description: "水道、道路、交通、通信。当たり前に使っているインフラが、人口減少で維持できなくなる時代。テクノロジーと新しい運営モデルで、インフラの未来を設計し直す。",
+    whyItMatters: "2040年には全国の自治体の半数がインフラ維持困難に陥ると推計されています。IoTによる遠隔監視やオープンデータ活用が、限られた資源で社会を維持する鍵です。",
+    stats: [
+      { label: "調査対象自治体", value: "25市町村" },
+      { label: "オープンデータ化路線", value: "180路線" },
+      { label: "参加者", value: "10人" },
+    ],
+    stories: [
+      {
+        id: "s-infra-1",
+        companyId: "mirai-tech",
+        title: "バスの時刻表をデジタル化したら、お年寄りの外出が増えた",
+        summary: "地方のバス会社と協力して運行データをGTFS形式で公開。Google Maps対応になった途端、高齢者の「バスの乗り方がわからない」問題が解消し、乗客数が12%増加。",
+        personName: "高橋 翔",
+        personRole: "データエンジニア（プロボノ参加）",
+        personAvatar: "🚌",
+        quote: "たかがデータ変換。でもそれだけで、おばあちゃんがバスに乗れるようになった。技術の力を一番実感した瞬間でした。",
+        tags: ["交通", "オープンデータ", "高齢化"],
+      },
+    ],
+    engagements: [
+      { type: "contract", questIds: ["q-infra-2"] },
+      { type: "project", questIds: ["q-infra-1", "q-infra-2"] },
+      { type: "probono", questIds: ["q-infra-2"] },
+    ],
+    questIds: ["q-infra-1", "q-infra-2"],
+  },
+  {
+    id: "education",
+    label: "子どもたちや学びの",
+    subtitle: "未来をひらく",
+    color: "#E8A63A",
+    description: "離島の教育格差、不登校、STEAM教育。すべての子どもが「学びたい」と思ったときに、最高の学びにアクセスできる社会を作る。場所も、環境も、経済状況も、関係なく。",
+    whyItMatters: "不登校の児童生徒は過去最多の約30万人。離島・過疎地ではIT教育の人材が圧倒的に不足。一方でオンライン技術は成熟し、解決の手段は揃っています。足りないのは、繋ぐ人です。",
+    stats: [
+      { label: "オンライン授業実施校", value: "18校" },
+      { label: "バーチャル教室利用者", value: "120名" },
+      { label: "参加者", value: "20人" },
+    ],
+    stories: [
+      {
+        id: "s-edu-1",
+        companyId: "manabiya",
+        title: "離島の中学生がPythonで作った『漁獲量予測アプリ』",
+        summary: "オンラインプログラミング授業を受けた奄美大島の中学生が、地元の漁師のために漁獲量予測アプリを開発。「自分の島の役に立てた」と涙した姿が、講師チーム全員の原動力に。",
+        personName: "太田 海斗",
+        personRole: "中学3年生・奄美大島",
+        personAvatar: "🐟",
+        quote: "Pythonって呪文みたいだったけど、先生が毎週画面の向こうで教えてくれた。じいちゃんの船に使えるアプリ作れて、最高。",
+        tags: ["離島教育", "プログラミング", "地域課題"],
+      },
+    ],
+    engagements: [
+      { type: "probono", questIds: ["quest-002"] },
+      { type: "project", questIds: ["quest-006", "q-edu-3", "q-edu-4"] },
+      { type: "intern", questIds: ["q-edu-3"] },
+      { type: "oneday", questIds: ["quest-002"] },
+    ],
+    questIds: ["quest-002", "quest-006", "q-edu-3", "q-edu-4"],
+  },
+  {
+    id: "food",
+    label: "食・農の",
+    subtitle: "これからを追求する",
+    color: "#5B8C3E",
+    description: "フードロス、都市農業、食の安全。「食べる」は生きることの根幹。余っているのに届かない矛盾、農家の高齢化、食の多様性の喪失。テクノロジーと人の繋がりで、食の未来を作り直す。",
+    whyItMatters: "日本のフードロスは年間523万トン。一方で7人に1人の子どもが貧困状態。余剰食品と需要のミスマッチを解消するだけで、社会が大きく変わります。",
+    stats: [
+      { label: "フードロス削減量", value: "月間8.5t" },
+      { label: "連携飲食店", value: "1,200店" },
+      { label: "参加者", value: "10人" },
+    ],
+    stories: [
+      {
+        id: "s-food-1",
+        companyId: "earth-kitchen",
+        title: "閉店1時間前の『もったいない』がつなぐ、店と人",
+        summary: "フードロスマッチングアプリで余剰食品を提供し始めたカフェオーナーの西田さん。毎日捨てていたパンが、子ども食堂の子どもたちの笑顔に変わった。",
+        personName: "西田 あかり",
+        personRole: "カフェオーナー",
+        personAvatar: "🍞",
+        quote: "前は閉店後にパンを捨てるのが一番辛かった。今は『明日も多めに焼こう』って思える。アプリひとつで、こんなに気持ちが変わるなんて。",
+        tags: ["フードロス", "飲食", "子ども食堂"],
+      },
+    ],
+    engagements: [
+      { type: "fulltime", questIds: ["q-food-1"] },
+      { type: "project", questIds: ["q-food-1", "q-food-2"] },
+      { type: "probono", questIds: ["q-food-2"] },
+      { type: "oneday", questIds: ["q-food-2"] },
+    ],
+    questIds: ["q-food-1", "q-food-2"],
+  },
+  {
+    id: "experience",
+    label: "非日常の",
+    subtitle: "感動体験を提供する",
+    color: "#C75BA3",
+    description: "秘境ツアー、VR体験、文化ツーリズム。日常を離れた感動体験は、人の価値観を変え、新しい行動を生み出す。体験の力で地域と人を繋ぎ、持続可能な観光モデルを作る。",
+    whyItMatters: "オーバーツーリズムが問題になる観光地がある一方、知られざる地方の魅力は観光資源として活かされていません。体験価値を軸にした新しい観光が、地域を救います。",
+    stats: [
+      { label: "ツアー開発地域", value: "8地域" },
+      { label: "VRコンテンツ", value: "5作品" },
+      { label: "参加者", value: "8人" },
+    ],
+    stories: [
+      {
+        id: "s-exp-1",
+        companyId: "machi-lab",
+        title: "『何もない』が最高の観光資源だった",
+        summary: "過疎の村でツアーを企画した時、地元の人は「うちには何もない」と言った。でも満天の星空、手作り豆腐、囲炉裏の火。参加者の満足度は5段階中4.9。『何もない贅沢』がブランドになった。",
+        personName: "渡辺 麻衣",
+        personRole: "観光プランナー",
+        personAvatar: "✨",
+        quote: "観光って『映える場所に行く』ことじゃなかった。『自分が変わる体験をする』こと。それに気づいた時、仕事の意味が変わった。",
+        tags: ["サステナブル観光", "地方創生", "体験設計"],
+      },
+    ],
+    engagements: [
+      { type: "project", questIds: ["q-exp-1", "q-exp-2"] },
+      { type: "contract", questIds: ["q-exp-2"] },
+      { type: "oneday", questIds: ["q-exp-1"] },
+    ],
+    questIds: ["q-exp-1", "q-exp-2"],
+  },
+  {
+    id: "community",
+    label: "街をつくる",
+    subtitle: "地域に貢献する",
+    color: "#6B9E7A",
+    description: "空き家、シェアハウス、地域通貨。人口が減る時代の「まちづくり」は、箱モノではなく関係性のデザイン。住む人も訪れる人も、一緒に街を育てていく仕組みを作る。",
+    whyItMatters: "全国の空き家は約849万戸で過去最多。一方で地方移住希望者は年々増加中。問題は「空き家がある」ことではなく「つなぐ仕組みがない」こと。テクノロジーとコミュニティデザインで解決できます。",
+    stats: [
+      { label: "運営拠点", value: "12箇所" },
+      { label: "移住マッチング", value: "年間150組" },
+      { label: "参加者", value: "16人" },
+    ],
+    stories: [
+      {
+        id: "s-comm-1",
+        companyId: "machi-lab",
+        title: "空き家をリノベしたら、街に『おかえり』が生まれた",
+        summary: "廃墟同然の空き家をコミュニティスペースにリノベ。最初は怪訝な顔だった地元のおじいちゃんたちが、今では毎日お茶を持って遊びに来る常連に。",
+        personName: "小林 裕介",
+        personRole: "まちラボ 拠点マネージャー",
+        personAvatar: "🏠",
+        quote: "建物を直すのは手段でしかなかった。本当に作りたかったのは、人と人の間に流れる空気。それは図面には描けない。",
+        tags: ["空き家活用", "リノベーション", "コミュニティ"],
+      },
+    ],
+    engagements: [
+      { type: "fulltime", questIds: ["q-comm-1"] },
+      { type: "contract", questIds: ["q-comm-3"] },
+      { type: "project", questIds: ["q-comm-1", "q-comm-2", "q-comm-3"] },
+      { type: "intern", questIds: ["q-comm-1"] },
+      { type: "oneday", questIds: ["q-comm-2"] },
+    ],
+    questIds: ["q-comm-1", "q-comm-2", "q-comm-3"],
+  },
+  {
+    id: "japan",
+    label: "日本らしい価値を",
+    subtitle: "世界中へ",
+    color: "#C44E4E",
+    description: "和食、職人技、おもてなし。日本が世界に誇る価値を、新しい形で世界に届ける。伝統を守るだけでなく、テクノロジーとクリエイティビティで進化させ、次の100年の日本ブランドを作る。",
+    whyItMatters: "和食はユネスコ無形文化遺産ですが、海外での理解は「寿司・ラーメン」に偏っています。NFTやデジタルアートという新しい手段が、職人に新たな収益源と世界への扉を開きます。",
+    stats: [
+      { label: "連携職人", value: "80名" },
+      { label: "海外売上成長率", value: "前年比200%" },
+      { label: "参加者", value: "7人" },
+    ],
+    stories: [
+      {
+        id: "s-japan-1",
+        companyId: "heritage-bridge",
+        title: "和包丁のNFTが、NYのシェフに届いた日",
+        summary: "堺の和包丁職人が作る工程を撮影・NFT化。購入者には実際の包丁も届く仕組みに。NYの星付きシェフがSNSで紹介し、職人の元に世界中から注文が殺到。",
+        personName: "岩田 鉄太郎",
+        personRole: "和包丁職人・4代目",
+        personAvatar: "🔨",
+        quote: "ニューヨークの料理人が『あなたの包丁が欲しい』って。親父に言ったら泣いとったわ。こんな時代が来るとはな。",
+        tags: ["NFT", "和包丁", "職人", "海外展開"],
+      },
+    ],
+    engagements: [
+      { type: "fulltime", questIds: ["q-jp-1"] },
+      { type: "contract", questIds: ["q-jp-2"] },
+      { type: "project", questIds: ["q-jp-1", "q-jp-2"] },
+      { type: "oneday", questIds: ["q-jp-1"] },
+    ],
+    questIds: ["q-jp-1", "q-jp-2"],
+  },
+  {
+    id: "economy",
+    label: "経営・経済から",
+    subtitle: "社会を元気に",
+    color: "#3B7DD4",
+    description: "インパクト投資、地方DX、ソーシャルファイナンス。お金の流れを変えれば、社会は変わる。経営と経済の専門知識を、社会課題の解決に直結させる。ビジネスの力で社会を元気にする。",
+    whyItMatters: "地方の中小企業の約7割がDXに未着手。インパクト投資の市場は10年で10倍に成長。経営・金融のプロが社会課題に関わるチャネルが圧倒的に足りていません。",
+    stats: [
+      { label: "DX支援企業", value: "年間30社" },
+      { label: "インパクト投資学習者", value: "250名" },
+      { label: "参加者", value: "14人" },
+    ],
+    stories: [
+      {
+        id: "s-econ-1",
+        companyId: "mirai-tech",
+        title: "元・外資コンサルが地方の町工場に通い続ける理由",
+        summary: "マッキンゼーを辞めてDX支援隊に参加した佐藤さん。最初は「3ヶ月だけ」のつもりが、町工場のおっちゃんたちの変化に魅せられて2年目に突入。",
+        personName: "佐藤 健太",
+        personRole: "DX支援隊リーダー（元外資コンサル）",
+        personAvatar: "📊",
+        quote: "コンサルの時は偉そうに提案書を書いてた。今は毎朝5時に工場に行って、一緒にExcelの使い方から教えてる。こっちの方が100倍手応えがある。",
+        tags: ["DX支援", "地方創生", "キャリアチェンジ"],
+      },
+    ],
+    engagements: [
+      { type: "fulltime", questIds: ["q-econ-2"] },
+      { type: "contract", questIds: ["q-econ-2"] },
+      { type: "probono", questIds: ["q-econ-1", "q-econ-2"] },
+      { type: "project", questIds: ["q-econ-1"] },
+      { type: "intern", questIds: ["q-econ-2"] },
+    ],
+    questIds: ["q-econ-1", "q-econ-2"],
+  },
+  {
+    id: "global",
+    label: "世界各地の",
+    subtitle: "発展と幸せに貢献",
+    color: "#4BA89C",
+    description: "水インフラ、難民支援、遠隔医療。国境を越えて、すべての人が自分の可能性を発揮できる世界を作る。日本の技術と経験を、世界の最も困難な現場に届ける。",
+    whyItMatters: "世界で4億人が安全な飲料水にアクセスできず、約1億人が難民・避難民。日本には世界トップクラスの水処理技術と医療技術がある。足りないのは、現場に届ける仕組みと人です。",
+    stats: [
+      { label: "展開国", value: "8カ国" },
+      { label: "スキル研修修了者", value: "年間500名" },
+      { label: "参加者", value: "16人" },
+    ],
+    stories: [
+      {
+        id: "s-global-1",
+        companyId: "global-compass",
+        title: "ケニアの村に水が届いた日、エンジニアは泣いた",
+        summary: "日本の浄水技術を現地仕様にカスタマイズして導入。蛇口から水が出た瞬間、村中の子どもたちが踊り出した。プロジェクトリーダーの松本さんは、その場で泣き崩れた。",
+        personName: "松本 拓也",
+        personRole: "グローバルコンパス プロジェクトリーダー",
+        personAvatar: "🌍",
+        quote: "技術は世界を変えるって教科書に書いてあった。でも目の前で本当に変わるのを見たとき、自分の人生の意味がわかった気がした。",
+        tags: ["水インフラ", "ケニア", "技術移転"],
+      },
+    ],
+    engagements: [
+      { type: "fulltime", questIds: ["q-global-1", "q-global-2"] },
+      { type: "contract", questIds: ["q-global-3"] },
+      { type: "project", questIds: ["q-global-1", "q-global-2", "q-global-3"] },
+      { type: "intern", questIds: ["q-global-2"] },
+      { type: "oneday", questIds: ["q-global-2"] },
+    ],
+    questIds: ["q-global-1", "q-global-2", "q-global-3"],
+  },
+];
+
 export function getQuestsByCompany(companyId: string): Quest[] {
   return quests.filter((q) => q.companyId === companyId);
 }
 
 export function getCommentsByQuest(questId: string): Comment[] {
   return comments.filter((c) => c.questId === questId);
+}
+
+export function getQuestsByTheme(themeId: string): Quest[] {
+  const theme = socialThemes.find((t) => t.id === themeId);
+  if (!theme) return [];
+  return theme.questIds.map((id) => quests.find((q) => q.id === id)).filter((q): q is Quest => !!q);
+}
+
+export function getThemeById(themeId: string): SocialTheme | undefined {
+  return socialThemes.find((t) => t.id === themeId);
 }

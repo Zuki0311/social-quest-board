@@ -593,7 +593,13 @@ export default function MapPage() {
             <span className="w-4 h-4 rounded-full" style={{ backgroundColor: selectedTheme.color }} />
             <span className="font-bold text-gray-800">{selectedTheme.label}</span>
             <span className="text-xs text-gray-400">{selectedTheme.subtitle}</span>
-            <span className="ml-auto text-xs text-gray-400">{selectedTheme.quests.length} クエスト</span>
+            <Link
+              href={`/themes/${selectedTheme.id}`}
+              className="ml-auto text-xs font-medium px-3 py-1 rounded-md transition-colors"
+              style={{ color: selectedTheme.color, backgroundColor: selectedTheme.color + "15" }}
+            >
+              志の一次情報を見る →
+            </Link>
           </div>
           <div className="flex flex-wrap gap-2">
             {selectedTheme.quests.map((q) => (

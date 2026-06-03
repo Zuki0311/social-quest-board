@@ -43,6 +43,12 @@ export default function RootLayout({
                     企業・団体
                   </Link>
                   <Link
+                    href="/themes"
+                    className="hover:text-white transition-colors"
+                  >
+                    ソーシャルテーマ
+                  </Link>
+                  <Link
                     href="/map"
                     className="hover:text-white transition-colors"
                   >
